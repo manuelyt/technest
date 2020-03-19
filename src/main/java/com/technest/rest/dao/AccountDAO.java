@@ -39,7 +39,29 @@ public class AccountDAO {
 	public boolean updateAccount(int id, Account account) {
 		for (Account acc : list.getAccountList()) {
 			if (acc.getId() == id) {
+				list.getAccountList().remove(acc);
+				list.getAccountList().add(account);
 				acc.setAll(id, acc.getName(), acc.getCurrency(), acc.getBalance(), acc.isTreasury());
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean deleteByName(String name) {
+		for (Account acc : list.getAccountList()) {
+			if (acc.getName().contentEquals(name)) {
+				list.getAccountList().remove(acc);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean delete(int id) {
+		for (Account acc : list.getAccountList()) {
+			if (acc.getId() == id) {
+				list.getAccountList().remove(acc);
 				return true;
 			}
 		}
